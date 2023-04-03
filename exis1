@@ -1,1 +1,28 @@
 
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import copy
+plt.rcParams['font.family'] = ['sans-serif']
+plt.rcParams['font.sans-serif'] = ['SimHei']
+
+crime = pd.read_csv("E:/edg/US_Crime_Rates_1960_2014.csv",encoding = 'gbk')
+crime['Year']= pd.to_datetime (crime.Year,format='%Y')
+crime.index = crime.Year
+crime = crime.drop('Year',axis = 1)
+crime1 = crime.resample('10YS').ffill()
+print(crime1)
+
+print('*'*15)
+plt.subplot (121)
+crime.Population.plot(style = 'r-',label='population')
+crime.Population.rolling(10,min_periods=2).mean().plot(style = 'b-',label = 'rolling')
+plt.title ('k均值')
+plt.legend ()
+plt.subplot (122)
+crime.Population.plot(style = 'r-',label='population')
+crime.Population.ewm(span=30,min_periods=2).mean().plot(style = 'g-',label = 'ewm')
+plt.title ('k均值')
+plt.legend ()
+plt.show()
