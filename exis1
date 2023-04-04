@@ -1,28 +1,16 @@
-
-import matplotlib.pyplot as plt
-import pandas as pd
 import numpy as np
-import seaborn as sns
-import copy
-plt.rcParams['font.family'] = ['sans-serif']
-plt.rcParams['font.sans-serif'] = ['SimHei']
-
-crime = pd.read_csv("E:/edg/US_Crime_Rates_1960_2014.csv",encoding = 'gbk')
-crime['Year']= pd.to_datetime (crime.Year,format='%Y')
-crime.index = crime.Year
-crime = crime.drop('Year',axis = 1)
-crime1 = crime.resample('10YS').ffill()
-print(crime1)
-
-print('*'*15)
-plt.subplot (121)
-crime.Population.plot(style = 'r-',label='population')
-crime.Population.rolling(10,min_periods=2).mean().plot(style = 'b-',label = 'rolling')
-plt.title ('k均值')
-plt.legend ()
-plt.subplot (122)
-crime.Population.plot(style = 'r-',label='population')
-crime.Population.ewm(span=30,min_periods=2).mean().plot(style = 'g-',label = 'ewm')
-plt.title ('k均值')
-plt.legend ()
-plt.show()
+import pandas as pd
+for i in range(5000):
+    x=np.random.random(1000)
+    y=np.zeros(1000)
+    y[x<0.1]=0
+    y[(x>=0.1)&(x<0.3)]=1
+    y[(x>=0.3)&(x<0.5)]=2
+    y[(x>=0.5)&(x<0.7)]=3
+    y[(x>=0.7)&(x<=1)]=4
+    data = pd.DataFrame({'0':[len(y[x<0.1]),100],'1':[len(y[(x>=0.1)&(x<0.3)]),200],
+                         '2':[len(y[(x>=0.3)&(x<0.5)]),200],
+                         '3':[len(y[(x>=0.5)&(x<0.7)]),200],
+                         '4':[len(y[(x>=0.7)&(x<=1)]),300]})
+    print(data)
+    print('*'*10)
