@@ -1,1 +1,27 @@
 
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import copy
+import math
+plt.rcParams['font.family'] = ['sans-serif']
+plt.rcParams['font.sans-serif'] = ['SimHei']
+
+
+data = pd.read_csv("E:/edg/visual.csv",encoding = 'gbk')
+plt.subplot(121)
+plt.hist(data.北京)
+plt.subplot(122)
+plt.hist(data.上海)
+plt.show()
+data['北京1'] = data.北京/sum(data.北京)
+data['天津1'] = data.天津/sum(data.天津)
+data['上海1'] = data.上海/sum(data.上海)
+data['重庆1'] = data.重庆/sum(data.重庆)
+print(data.head())
+plt.pie(data['北京1'],labels = data.支出项目)
+plt.show()
+plt.hist(data['北京1'])
+plt.show()
+
