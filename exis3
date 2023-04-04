@@ -1,1 +1,17 @@
 
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import copy
+import math
+plt.rcParams['font.family'] = ['sans-serif']
+plt.rcParams['font.sans-serif'] = ['SimHei']
+
+
+data = pd.read_csv("E:/edg/ramen-ratings.csv",encoding = 'utf-8')
+print(data.groupby(['Country']).Brand.count().sort_values()[::-1])
+plt.hist(data.groupby(['Country']).Brand.count().sort_values()[-1:-11:-1])
+plt.show()
+print(data.groupby(['Country']).agg(['max'])[['Brand']])
+print(data.groupby(['Country']).agg(['mean']).Stars)
