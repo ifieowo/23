@@ -1,1 +1,20 @@
 
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import copy
+import math
+plt.rcParams['font.family'] = ['sans-serif']
+plt.rcParams['font.sans-serif'] = ['SimHei']
+
+
+data = pd.read_csv("E:/edg/Trade.csv",encoding = 'utf-8')
+data.Date = pd.to_datetime (data.Date)
+data.index = data.Date
+data = data.drop('Date',axis = 1)
+print(data[data.index.year==2009].groupby(['Order_Class']).count().Sales/len(data.Order_Class))
+data1 = data[data.index.year==2009].groupby(['Region']).sum()
+print(data1.Sales-data1.Trans_Cost)
+print(data[data.index.year==2009].groupby(['Transport']).count().Order_Class/len(data.Transport))
+
