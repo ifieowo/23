@@ -1,4 +1,3 @@
-
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
@@ -14,7 +13,7 @@ data.Date = pd.to_datetime (data.Date)
 data.index = data.Date
 data = data.drop('Date',axis = 1)
 print(data[data.index.year==2009].groupby(['Order_Class']).count().Sales/len(data.Order_Class))
-data1 = data[data.index.year==2009].groupby(['Region']).sum()
+data1 = data[data.index.year==2010].groupby(['Region']).sum()
 print(data1.Sales-data1.Trans_Cost)
-print(data[data.index.year==2009].groupby(['Transport']).count().Order_Class/len(data.Transport))
+print(data[data.index.year==2011].groupby(['Transport']).count().Order_Class/len(data.Transport))
 
